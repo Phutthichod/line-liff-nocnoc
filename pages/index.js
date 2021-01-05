@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 // import liff from '@line/liff';
 import { useEffect, useState } from 'react'
 export default function Home() {
-  console.log("start")
+  alert("start")
   const [state, setState] = useState({})
   useEffect(async () => {
     const { default: liff } = await import("@line/liff");
@@ -14,6 +14,7 @@ export default function Home() {
       .then(() => {
         if (liff.isLoggedIn()) {
           const profile = liff.getProfile()
+          alert(profile)
           console.log(profile)
           setState(profile)
         } else {
