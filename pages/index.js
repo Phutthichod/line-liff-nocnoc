@@ -15,46 +15,52 @@ export default function Home() {
     setName(name)
   }
   const addNewUser = () => {
-    console.log(state)
-    db
-      .collection('user')
-      .doc(state.userId).set({
-        ...state, name
-      }).then(() => {
-        console.log("success")
-        setIsNewUser(false)
-      }).catch(function (error) {
-        console.error("Error writing document: ", error);
-      });
+    loadData.then(res => {
+      console.log(res)
+    })
+    // console.log(state)
+    // db
+    //   .collection('user')
+    //   .doc(state.userId).set({
+    //     ...state, name
+    //   }).then(() => {
+    //     console.log("success")
+    //     setIsNewUser(false)
+    //   }).catch(function (error) {
+    //     console.error("Error writing document: ", error);
+    //   });
 
 
   }
 
-  const loadData = (data) => {
-    var docRef = db.collection("user").doc(data.userId);
-    docRef.get().then(function (doc) {
-      if (doc.exists) {
-        console.log("Document data:", doc.data());
-        setState({ ...data, ...doc.data() })
-        setIsNewUser(false)
-        setLoading(false)
-      } else {
-        setIsNewUser(true)
-        setLoading(false)
-        // router.push("/createName")
-      }
-    }).catch(function (error) {
-      console.log("Error getting document:", error);
-    });
+  const loadData = async () => {
+    const data = await liff.getProfile()
+    console.log(data)
+    // var docRef = db.collection("user").doc(data.userId);
+    // docRef.get().then(function (doc) {
+    //   if (doc.exists) {
+    //     console.log("Document data:", doc.data());
+    //     setState({ ...data, ...doc.data() })
+    //     setIsNewUser(false)
+    //     setLoading(false)
+    //   } else {
+    //     setIsNewUser(true)
+    //     setLoading(false)
+    //     // router.push("/createName")
+    //   }
+    // }).catch(function (error) {
+    //   console.log("Error getting document:", error);
+    // });
   }
   useEffect(async () => {
     const { default: liff } = await import("@line/liff");
     await liff.init({
       liffId: "1655538913-PnDo5YK0" // Use own liffId
     })
-    const data = await liff.getProfile()
+
     if (liff.isLoggedIn()) {
-      loadData(data)
+
+      // loadData(data)
     } else {
       liff.login()
     }
