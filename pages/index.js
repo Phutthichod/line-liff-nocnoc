@@ -34,8 +34,9 @@ export default function Home() {
       if (doc.exists) {
         console.log("Document data:", doc.data());
         setIsNewUser(false)
-        setState(doc.data())
+
         setLoading(false)
+        setState({ ...data, ...doc.data() })
       } else {
         setIsNewUser(true)
         setLoading(false)
