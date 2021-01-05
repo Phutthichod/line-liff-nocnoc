@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import CreateName from './createNewName'
-import fire from './config/fire-config'
+import fire from '../config/fire-config'
 const db = fire.firestore()
 
 export default function Home() {
