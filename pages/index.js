@@ -33,10 +33,9 @@ export default function Home() {
     docRef.get().then(function (doc) {
       if (doc.exists) {
         console.log("Document data:", doc.data());
-        setIsNewUser(false)
-
-        setLoading(false)
         setState({ ...data, ...doc.data() })
+        setIsNewUser(false)
+        setLoading(false)
       } else {
         setIsNewUser(true)
         setLoading(false)
@@ -51,9 +50,10 @@ export default function Home() {
     await liff.init({
       liffId: "1655538913-PnDo5YK0" // Use own liffId
     })
+    const profile = await liff.getProfile()
+    loadData(profile)
     if (liff.isLoggedIn()) {
-      const profile = await liff.getProfile()
-      loadData(profile)
+
     } else {
       liff.login()
     }
