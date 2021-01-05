@@ -24,6 +24,7 @@ export default function Home() {
         ...state, name
       }).then(() => {
         console.log("success")
+        setState({ name, ...state })
         setIsNewUser(false)
       }).catch(function (error) {
         console.error("Error writing document: ", error);
