@@ -30,8 +30,7 @@ export default function Home() {
 
   }
 
-  const loadData = () => {
-    const data = await liff.getProfile()
+  const loadData = (data) => {
     var docRef = db.collection("user").doc(data.userId);
     docRef.get().then(function (doc) {
       if (doc.exists) {
@@ -53,9 +52,9 @@ export default function Home() {
     await liff.init({
       liffId: "1655538913-PnDo5YK0" // Use own liffId
     })
-
+    const data = await liff.getProfile()
     if (liff.isLoggedIn()) {
-      loadData()
+      loadData(data)
     } else {
       liff.login()
     }
