@@ -17,8 +17,8 @@ export default function Home() {
   const addNewUser = () => {
     db
       .collection('user')
-      .doc(data.userId).set({
-        ...data, name
+      .doc(state.userId).set({
+        ...state, name
       });
   }
   const loadData = (data) => {
