@@ -17,17 +17,17 @@ export default function Home() {
   }
   const addNewUser = () => {
     // loadData()
-    console.log(state)
-    // db
-    //   .collection('user')
-    //   .doc(state.userId).set({
-    //     ...state, name
-    //   }).then(() => {
-    //     console.log("success")
-    //     setIsNewUser(false)
-    //   }).catch(function (error) {
-    //     console.error("Error writing document: ", error);
-    //   });
+    console.log(state, name)
+    db
+      .collection('user')
+      .doc(state.userId).set({
+        ...state, name
+      }).then(() => {
+        console.log("success")
+        setIsNewUser(false)
+      }).catch(function (error) {
+        console.error("Error writing document: ", error);
+      });
 
 
   }
