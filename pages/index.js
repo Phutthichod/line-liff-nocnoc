@@ -16,7 +16,7 @@ export default function Home() {
           console.log(profile)
           setState(profile)
         } else {
-          liff.login({ redirectUri: "https://app.netlify.com/sites/flamboyant-leavitt-005201/overview" })
+          liff.login()
         }
 
       })
