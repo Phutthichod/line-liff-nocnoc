@@ -15,6 +15,7 @@ export default function Home() {
     setName(name)
   }
   const addNewUser = () => {
+    console.log(state)
     db
       .collection('user')
       .doc(state.userId).set({
@@ -28,7 +29,9 @@ export default function Home() {
 
 
   }
-  const loadData = (data) => {
+
+  const loadData = () => {
+    const data = await liff.getProfile()
     var docRef = db.collection("user").doc(data.userId);
     docRef.get().then(function (doc) {
       if (doc.exists) {
@@ -50,10 +53,9 @@ export default function Home() {
     await liff.init({
       liffId: "1655538913-PnDo5YK0" // Use own liffId
     })
-    const profile = await liff.getProfile()
-    loadData(profile)
-    if (liff.isLoggedIn()) {
 
+    if (liff.isLoggedIn()) {
+      loadData()
     } else {
       liff.login()
     }
