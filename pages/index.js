@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 // import liff from '@line/liff';
 import { useEffect, useState } from 'react'
 export default function Home() {
+  console.log("start")
   const [state, setState] = useState({})
   useEffect(async () => {
     const { default: liff } = await import("@line/liff");
