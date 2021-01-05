@@ -2,11 +2,13 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import CreateName from './createNewName'
 import fire from '../config/fire-config'
-import liff from '@line/liff/dist/lib'
+// import liff from '@line/liff/dist/lib'
+import { useRouter } from 'next/router'
 const db = fire.firestore()
 
 export default function Home() {
   console.log("new")
+  const router = useRouter()
   const [state, setState] = useState({})
   const [loading, setLoading] = useState(true)
   const [isNewUser, setIsNewUser] = useState(true)
@@ -78,16 +80,18 @@ export default function Home() {
           {
             isNewUser ? <CreateName onChangeName={onChangeName} onSubmit={addNewUser} /> :
               <div>
-                <Link href="/createName">go to new name</Link>
+                {/* <Link href="/createName">go to new name</Link> */}
                 <h2>Id: {state.userId}</h2>
                 <h2>NameLine: {state.displayName}</h2>
                 <h2>NameNocnoc: {state.name}</h2>
                 <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
                 <h2>status {state.statusMessage}</h2>
+                <button onClick={() => {
+                  liff.logout()
+                  router.push("/")
+                }}>Logout</button>
               </div>
-              <button onClick={()=>{
-                liff.logout()
-              }}>Logout</button>
+
           }
         </>
       }
