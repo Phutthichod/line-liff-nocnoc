@@ -19,7 +19,11 @@ export default function Home() {
       .collection('user')
       .doc(state.userId).set({
         ...state, name
-      });
+      }).then(() => {
+        setIsNewUser(false)
+      })
+
+
   }
   const loadData = (data) => {
     var docRef = db.collection("user").doc(data.userId);

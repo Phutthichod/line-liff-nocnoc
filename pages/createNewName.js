@@ -5,7 +5,7 @@ export default function index({ onChangeName, onSubmit }) {
         <div>
             <input onChange={(e) => {
                 onChangeName(e.target.value)
-            }} /><button onClick={onSubmit}>create new Name</button>
+            }} /><button onClick={() => onSubmit()}>create new Name</button>
         </div>
     )
 }
