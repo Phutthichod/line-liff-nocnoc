@@ -12,11 +12,12 @@ export default function Home() {
   const [name, setName] = useState("")
 
   const onChangeName = (name) => {
+    console.log("setname")
     setName(name)
   }
   const addNewUser = () => {
-    loadData()
-    // console.log(state)
+    // loadData()
+    console.log(state)
     // db
     //   .collection('user')
     //   .doc(state.userId).set({
@@ -33,22 +34,25 @@ export default function Home() {
 
   const loadData = async () => {
     const data = await liff.getProfile()
-    console.log(data)
-    // var docRef = db.collection("user").doc(data.userId);
-    // docRef.get().then(function (doc) {
-    //   if (doc.exists) {
-    //     console.log("Document data:", doc.data());
-    //     setState({ ...data, ...doc.data() })
-    //     setIsNewUser(false)
-    //     setLoading(false)
-    //   } else {
-    //     setIsNewUser(true)
-    //     setLoading(false)
-    //     // router.push("/createName")
-    //   }
-    // }).catch(function (error) {
-    //   console.log("Error getting document:", error);
-    // });
+    // console.log(data)
+    setState(data)
+    var docRef = db.collection("user").doc(data.userId);
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
+        console.log("have", doc.data())
+        // console.log("Document data:", doc.data());
+        setState({ ...data, ...doc.data() })
+        setIsNewUser(false)
+        setLoading(false)
+      } else {
+        console.log("not have")
+        setIsNewUser(true)
+        setLoading(false)
+        // router.push("/createName")
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
   }
   useEffect(async () => {
     const { default: liff } = await import("@line/liff");
