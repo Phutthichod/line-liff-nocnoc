@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 // import liff from '@line/liff';
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 export default function Home() {
   console.log("new")
@@ -17,6 +18,7 @@ export default function Home() {
   }, [])
   return (
     <div>
+      <Link href="/createName">go to new name</Link>
       <h2>Id: {state.userId}</h2>
       <h2>Name: {state.displayName}</h2>
       <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
