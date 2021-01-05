@@ -3,29 +3,16 @@ import styles from '../styles/Home.module.css'
 // import liff from '@line/liff';
 import { useEffect, useState } from 'react'
 export default function Home() {
-  alert("start")
+  console.log("new")
   const [state, setState] = useState({})
   useEffect(async () => {
     const { default: liff } = await import("@line/liff");
-    liff
-      .init({
-        liffId: "1655538913-PnDo5YK0" // Use own liffId
-      })
-      .then(() => {
-        if (liff.isLoggedIn()) {
-          liff.getProfile().then(profile => {
-            console.log(profile)
-            setState(profile)
-          })
-        } else {
-          liff.login()
-        }
-
-      })
-      .catch((err) => {
-        // Error happens during initialization
-        console.log(err.code, err.message);
-      });
+    await liff.init({
+      liffId: "1655538913-PnDo5YK0" // Use own liffId
+    })
+    const profile = await liff.getProfile()
+    console.log(profile)
+    setState(profile)
 
   }, [])
   return (
