@@ -45,8 +45,7 @@ export default function Home() {
     })
     if (liff.isLoggedIn()) {
       const profile = await liff.getProfile()
-      console.log(profile)
-      setState(profile)
+      loadData(profile)
     } else {
       liff.login()
     }
