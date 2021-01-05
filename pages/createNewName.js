@@ -1,5 +1,5 @@
 import React from 'react'
-import fire from '../config/fire-config';
+import fire from './config/fire-config';
 export default function index({ onChangeName, onSubmit }) {
     return (
         <div>

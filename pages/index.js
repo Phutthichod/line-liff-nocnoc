@@ -55,22 +55,21 @@ export default function Home() {
   }, [])
   return (
     <div>
-      {loading ? <h3>loading .... </h3> :
-
-        <div>
-          {isNewUser ? <CreateName /> :
-            <CreateName onChangeName={onChangeName} onSubmit={addNewUser}>
-              <Link href="/createName">go to new name</Link>
-              <h2>Id: {state.userId}</h2>
-              <h2>NameLine: {state.displayName}</h2>
-              <h2>NameNocnoc: {state.name}</h2>
-              <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
-              <h2>status {state.statusMessage}</h2></CreateName>}
-
-
-        </div>
+      { loading ? <h3>loading .... </h3> :
+        <>
+          {
+            isNewUser ? <CreateName onChangeName={onChangeName} onSubmit={addNewUser} /> :
+              <div>
+                <Link href="/createName">go to new name</Link>
+                <h2>Id: {state.userId}</h2>
+                <h2>NameLine: {state.displayName}</h2>
+                <h2>NameNocnoc: {state.name}</h2>
+                <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
+                <h2>status {state.statusMessage}</h2>
+              </div>
+          }
+        </>
       }
-
     </div>
   )
 }
