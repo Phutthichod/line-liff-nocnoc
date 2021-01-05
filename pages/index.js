@@ -88,7 +88,7 @@ export default function Home() {
                 <h2>status {state.statusMessage}</h2>
                 <button onClick={() => {
                   liff.logout()
-                  router.push("/")
+                  liff.login()
                 }}>Logout</button>
               </div>
 
