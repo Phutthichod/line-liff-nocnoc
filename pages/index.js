@@ -20,8 +20,11 @@ export default function Home() {
       .doc(state.userId).set({
         ...state, name
       }).then(() => {
+        console.log("success")
         setIsNewUser(false)
-      })
+      }).catch(function (error) {
+        console.error("Error writing document: ", error);
+      });
 
 
   }
