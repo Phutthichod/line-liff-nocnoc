@@ -1,28 +1,76 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-// import liff from '@line/liff';
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import CreateName from './createNewName'
+import fire from './config/fire-config'
+const db = fire.firestore()
+
 export default function Home() {
   console.log("new")
   const [state, setState] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [isNewUser, setIsNewUser] = useState(true)
+  const [name, setName] = useState("")
+
+  const onChangeName = (name) => {
+    setName(name)
+  }
+  const addNewUser = () => {
+    db
+      .collection('user')
+      .doc(data.userId).set({
+        ...data, name
+      });
+  }
+  const loadData = (data) => {
+    var docRef = db.collection("user").doc(data.userId);
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
+        console.log("Document data:", doc.data());
+        setIsNewUser(false)
+        setState(doc.data())
+        setLoading(false)
+      } else {
+        setIsNewUser(true)
+        setLoading(false)
+        // router.push("/createName")
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+  }
   useEffect(async () => {
     const { default: liff } = await import("@line/liff");
     await liff.init({
       liffId: "1655538913-PnDo5YK0" // Use own liffId
     })
-    const profile = await liff.getProfile()
-    console.log(profile)
-    setState(profile)
+    if (liff.isLoggedIn()) {
+      const profile = await liff.getProfile()
+      console.log(profile)
+      setState(profile)
+    } else {
+      liff.login()
+    }
+
 
   }, [])
   return (
     <div>
-      <Link href="/createName">go to new name</Link>
-      <h2>Id: {state.userId}</h2>
-      <h2>Name: {state.displayName}</h2>
-      <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
-      <h2>status {state.statusMessage}</h2>
+      {loading ? <h3>loading .... </h3> :
+
+        <div>
+          {isNewUser ? <CreateName /> :
+            <CreateName onChangeName={onChangeName} onSubmit={addNewUser}>
+              <Link href="/createName">go to new name</Link>
+              <h2>Id: {state.userId}</h2>
+              <h2>NameLine: {state.displayName}</h2>
+              <h2>NameNocnoc: {state.name}</h2>
+              <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
+              <h2>status {state.statusMessage}</h2></CreateName>}
+
+
+        </div>
+      }
+
     </div>
   )
 }
