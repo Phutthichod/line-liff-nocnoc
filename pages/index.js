@@ -18,9 +18,9 @@ export default function Home() {
   return (
     <div>
       <h2>Id: {state.userId}</h2>
-      <h5>Name: {state.displayName}</h5>
+      <h2>Name: {state.displayName}</h2>
       <img src={state.pictureUrl} />
-      <p>status {state.statusMessage}</p>
+      <h2>status {state.statusMessage}</h2>
     </div>
   )
 }
