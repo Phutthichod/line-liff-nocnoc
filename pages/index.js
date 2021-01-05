@@ -60,7 +60,9 @@ export default function Home() {
 
     if (liff.isLoggedIn()) {
 
-      // loadData(data)
+      loadData.then(res => {
+        console.log(res)
+      })
     } else {
       liff.login()
     }
