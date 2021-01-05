@@ -13,10 +13,10 @@ export default function Home() {
       })
       .then(() => {
         if (liff.isLoggedIn()) {
-          const profile = liff.getProfile()
-          alert(profile)
-          console.log(profile)
-          setState(profile)
+          liff.getProfile().then(profile => {
+            console.log(profile)
+            setState(profile)
+          })
         } else {
           liff.login()
         }
