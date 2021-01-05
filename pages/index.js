@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import CreateName from './createNewName'
 import fire from '../config/fire-config'
+import liff from '@line/liff/dist/lib'
 const db = fire.firestore()
 
 export default function Home() {
@@ -84,6 +85,9 @@ export default function Home() {
                 <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
                 <h2>status {state.statusMessage}</h2>
               </div>
+              <button onClick={()=>{
+                liff.logout()
+              }}>Logout</button>
           }
         </>
       }
