@@ -15,9 +15,7 @@ export default function Home() {
     setName(name)
   }
   const addNewUser = () => {
-    loadData.then(res => {
-      console.log(res)
-    })
+    loadData()
     // console.log(state)
     // db
     //   .collection('user')
@@ -60,9 +58,7 @@ export default function Home() {
 
     if (liff.isLoggedIn()) {
 
-      loadData.then(res => {
-        console.log(res)
-      })
+      loadData()
     } else {
       liff.login()
     }
