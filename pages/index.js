@@ -19,7 +19,7 @@ export default function Home() {
     <div>
       <h2>Id: {state.userId}</h2>
       <h2>Name: {state.displayName}</h2>
-      <img src={state.pictureUrl} />
+      <img src={state.pictureUrl} style={{ height: 50, width: 50 }} />
       <h2>status {state.statusMessage}</h2>
     </div>
   )
