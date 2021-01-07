@@ -59,6 +59,9 @@ export default function Home() {
     });
   }
   useEffect(async () => {
+    fetch("/api/hello").then(res => res.json()).then(res => {
+      console.log(res)
+    })
     const { default: liff } = await import("@line/liff");
     await liff.init({
       liffId: "1655538913-PnDo5YK0" // Use own liffId
