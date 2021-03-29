@@ -16,6 +16,7 @@ axiosCustom.interceptors.request.use(config => {
     }
 );
 axiosCustom.interceptors.response.use(response => {
+    console.log(response)
     return response;
 }, async function (error) {
     const status = error.response ? error.response.status : null
@@ -63,7 +64,7 @@ axiosCustom.interceptors.response.use(response => {
                             });
                     })
                 } else {
-                    window.location.href("/")
+                    // window.location.href("/")
                 }
             } catch (err) {
 
