@@ -59,7 +59,7 @@ export default function Home() {
     if (!liff.isLoggedIn()) {
       gotoLogin(liff)
     } else {
-      console.log(liff.getAccessToken())
+
       await addOrGetUserInFirebaseAndSetUserState(profile)
     }
   }
@@ -69,6 +69,34 @@ export default function Home() {
     await importLineLIFF(liff)
     await initLineLiff(liff, "1655538913-PnDo5YK0")
     await checkIsLoginLine(liff)
+    fetch("https://63c8ac5f6fd1.ngrok.io/api/v1/survey/login", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + liff.getAccessToken(),
+      }
+    }).then(resp => {
+      console.log(resp)
+      fire.auth().signInWithCustomToken(resp.data.accessToken)
+        .then((userCredential) => {
+          // Signed in
+          fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+            console.log(idToken)
+            localStorage.setItem("access_token", idToken)
+          }).catch(function (error) {
+            // Handle error
+          });
+
+
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode, errorMessage)
+          // ...
+        });
+    })
   }, [router])
   return (
     <div>
