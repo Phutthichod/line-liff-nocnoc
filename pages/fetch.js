@@ -13,7 +13,7 @@ export default function fetch() {
         }).catch(err => {
             console.log(err)
         })
-    })
+    }, [])
     return (
         <div>
             {order.map(item => {
