@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import fire from '../config/fire-config'
 axios.interceptors.request.use(function (config) {
     const token = localStorage.getItem("access_token")
     config.headers.Authorization = `Bearer ${token}`;
