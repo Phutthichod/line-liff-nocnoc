@@ -67,9 +67,9 @@ export default function Home() {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + liff.getAccessToken(),
         }
-      }).then(resp => {
+      }).then(res => res.json()).then(resp => {
         console.log(resp)
-        fire.auth().signInWithCustomToken(resp.data.accessToken)
+        fire.auth().signInWithCustomToken(resp.accessToken)
           .then((userCredential) => {
             // Signed in
             fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
