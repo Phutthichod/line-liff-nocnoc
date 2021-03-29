@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 const firebaseConfig = {
-    apiKey: "AIzaSyA9FN4Sx_RmQ34TrVt3VTn_6lBwVZzwWGA",
-    authDomain: "pin2019-e2e80.firebaseapp.com",
-    databaseURL: "https://pin2019-e2e80.firebaseio.com",
-    projectId: "pin2019-e2e80",
-    storageBucket: "pin2019-e2e80.appspot.com",
-    messagingSenderId: "518984196083",
-    appId: "1:518984196083:web:7e937b408412a89582fc86"
+    apiKey: "AIzaSyDldGMOgCfQVqmu3cOBj_BbKphgXUtZPXg",
+    authDomain: "installer-app-service-dev.firebaseapp.com",
+    projectId: "installer-app-service-dev",
+    storageBucket: "installer-app-service-dev.appspot.com",
+    messagingSenderId: "65061419135",
+    appId: "1:65061419135:web:0e51bc63ccb0af4e60e74a",
+    measurementId: "G-M720M20GQC"
 };
 try {
     firebase.initializeApp(firebaseConfig);
