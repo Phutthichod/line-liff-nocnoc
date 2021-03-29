@@ -56,11 +56,10 @@ export default function Home() {
     liff.login()
   }
   const checkIsLoginLine = async (liff) => {
-    const profile = await liff.getProfile()
-    setProfileUser({ ...profile })
     if (!liff.isLoggedIn()) {
       gotoLogin(liff)
     } else {
+      console.log(liff.getAccessToken())
       await addOrGetUserInFirebaseAndSetUserState(profile)
     }
   }
