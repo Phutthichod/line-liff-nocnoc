@@ -69,7 +69,7 @@ export default function Home() {
         }
       }).then(res => res.json()).then(resp => {
         console.log(resp)
-        fire.auth().signInWithCustomToken(resp.accessToken)
+        fire.auth().signInWithCustomToken(resp.access_token)
           .then((userCredential) => {
             // Signed in
             fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
