@@ -41,10 +41,11 @@ axiosCustom.interceptors.response.use(function (response) {
                                 console.log(idToken)
                                 localStorage.setItem("access_token", idToken)
                                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + idToken;
-                                return axios(originalRequest)
+                                return axiosCustom(originalRequest)
                             }).catch(function (error) {
                                 // Handle error
-                                window.location.href("/")
+                                console.log(error)
+                                // window.location.href("/")
                             });
 
 
@@ -53,7 +54,7 @@ axiosCustom.interceptors.response.use(function (response) {
                             var errorCode = error.code;
                             var errorMessage = error.message;
                             console.log(errorCode, errorMessage)
-                            window.location.href("/")
+                            // window.location.href("/")
                             // ...
                         });
                 })
