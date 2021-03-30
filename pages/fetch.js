@@ -5,7 +5,7 @@ export default function fetch() {
     const [order, setOrder] = React.useState([])
     React.useEffect(async () => {
         const resp = await customAxios.get("https://b51008d01f25.ngrok.io/api/v1/survey/orders")
-        console.log("from fetch page" + await resp)
+        console.log("from fetch page", await resp)
         // console.log(resp.data)
     }, [])
     return (

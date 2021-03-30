@@ -16,12 +16,58 @@ axiosCustom.interceptors.request.use(config => {
     }
 );
 axiosCustom.interceptors.response.use(response => {
-    // console.log(response)
     return response;
-}, function (error) {
+}, async function (error) {
     const status = error.response ? error.response.status : null
     const originalRequest = error.config;
-    return { test: "data" }
+    try {
+        if (401 === status && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                const { default: liff } = await import("@line/liff");
+                await liff.init({
+                    liffId: "1655538913-PnDo5YK0"
+                })
+                if (liff.isLoggedIn()) {
+                    const resp = await axios.post("https://b51008d01f25.ngrok.io/api/v1/survey/login", {}, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + liff.getAccessToken(),
+                        }
+                    })
+                    const token = resp.data.access_token
 
+                    return fire.auth().signInWithCustomToken(token)
+                        .then((userCredential) => {
+                            // Signed in
+                            return fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+                                console.log(idToken)
+                                localStorage.setItem("access_token", idToken)
+                                axios.defaults.headers.common['Authorization'] = 'Bearer ' + idToken;
+                                return axiosCustom(originalRequest)
+                            }).catch(function (error) {
+                                // Handle error
+                                console.log(error)
+                                // window.location.href("/")
+                            });
+
+
+                        })
+                        .catch((error) => {
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            console.log(errorCode, errorMessage)
+                            // window.location.href("/")
+                            // ...
+                        });
+                } else {
+                    // window.location.href("/")
+                }
+            } catch (err) {
+
+            }
+        }
+    } catch (error) { }
 });
-export default axiosCustom
+export const customAxios = axiosCustom
