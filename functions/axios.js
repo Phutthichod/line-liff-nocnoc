@@ -30,7 +30,7 @@ axiosCustom.interceptors.response.use(response => {
                     liffId: "1655538913-PnDo5YK0"
                 })
                 if (liff.isLoggedIn()) {
-                    const resp = await axiosCustom.post("https://b51008d01f25.ngrok.io/api/v1/survey/login", {
+                    const resp = await axios.post("https://b51008d01f25.ngrok.io/api/v1/survey/login", {}, {
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
