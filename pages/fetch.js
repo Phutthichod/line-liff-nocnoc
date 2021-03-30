@@ -1,7 +1,7 @@
 import { responsiveFontSizes } from '@material-ui/core'
 import React from 'react'
 import customAxios from '../functions/axios'
-
+import fire from '../config/fire-config'
 export default function fetch() {
 
     const onLogout = async () => {
@@ -10,6 +10,9 @@ export default function fetch() {
             liffId: "1655538913-PnDo5YK0"
         })
         liff.logout()
+    }
+    const firebaseLogout = () => {
+        fire.auth().signOut()
     }
 
     const [order, setOrder] = React.useState([])
@@ -29,6 +32,7 @@ export default function fetch() {
                 return <p>{item.id}</p>
             })}
             <button onClick={onLogout}>logout</button>
+            <button onClick={firebaseLogout}>firebase logout</button>
         </div>
     )
 }
