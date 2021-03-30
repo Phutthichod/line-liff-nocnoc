@@ -4,13 +4,8 @@ import { customAxios } from '../functions/axios'
 export default function fetch() {
     const [order, setOrder] = React.useState([])
     React.useEffect(() => {
-        customAxios.get("https://b51008d01f25.ngrok.io/api/v1/survey/orders").then(res => {
-            console.log(res)
-            if (res.status === 200) {
-                setOrder(res.data)
-            }
-
-        })
+        const resp = await customAxios.get("https://b51008d01f25.ngrok.io/api/v1/survey/orders")
+        console.log(await resp)
     }, [])
     return (
         <div>
