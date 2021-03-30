@@ -47,9 +47,7 @@ axiosCustom.interceptors.response.use(response => {
                                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + idToken;
                                 return axiosCustom(originalRequest)
                             }).catch(function (error) {
-                                // Handle error
-                                console.log(error)
-                                // window.location.href("/")
+                                return Promise.reject(error);
                             });
 
 
@@ -58,16 +56,17 @@ axiosCustom.interceptors.response.use(response => {
                             var errorCode = error.code;
                             var errorMessage = error.message;
                             console.log(errorCode, errorMessage)
-                            // window.location.href("/")
-                            // ...
+                            return Promise.reject(error);
                         });
                 } else {
-                    // window.location.href("/")
+                    liff.login()
                 }
             } catch (err) {
-
+                return Promise.reject(error);
             }
 
+        } else {
+            return Promise.reject(error);
         }
     } catch (error) { }
     return Promise.reject(error);
