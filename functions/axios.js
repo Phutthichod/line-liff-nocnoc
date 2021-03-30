@@ -39,7 +39,7 @@ axiosCustom.interceptors.response.use(response => {
                     })
                     const token = resp.data.access_token
 
-                    fire.auth().signInWithCustomToken(token)
+                    return fire.auth().signInWithCustomToken(token)
                         .then((userCredential) => {
                             // Signed in
                             fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
