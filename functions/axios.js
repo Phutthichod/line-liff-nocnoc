@@ -1,11 +1,11 @@
 import axios from 'axios'
 import fire from '../config/fire-config'
 
-const axiosCustom = axios.create({
+const customAxios = axios.create({
     baseURL: ""
 });
 
-axiosCustom.interceptors.request.use(config => {
+customAxios.interceptors.request.use(config => {
     const token = localStorage.getItem("access_token")
     config.headers.Authorization = `Bearer ${token}`;
 
@@ -15,7 +15,7 @@ axiosCustom.interceptors.request.use(config => {
         Promise.reject(error);
     }
 );
-axiosCustom.interceptors.response.use(response => {
+customAxios.interceptors.response.use(response => {
     return response;
 }, async function (error) {
     const status = error.response ? error.response.status : null
@@ -71,4 +71,4 @@ axiosCustom.interceptors.response.use(response => {
     } catch (error) { }
     return Promise.reject(error);
 });
-export default axiosCustom
+export const axiosCustom = customAxios

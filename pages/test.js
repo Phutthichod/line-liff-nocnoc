@@ -1,7 +1,7 @@
 import React from 'react'
 // import { getAccessToken } from '../functions/login'
 import axios from 'axios'
-import customAxios from '../functions/axios'
+import { customAxios } from '../functions/axios'
 export default function test() {
     React.useEffect(async () => {
         const { default: liff } = await import("@line/liff");
