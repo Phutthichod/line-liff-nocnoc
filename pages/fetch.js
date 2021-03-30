@@ -7,6 +7,7 @@ export default function fetch() {
         const resp = await customAxios.get(" https://3bfdfa5d3211.ngrok.io/api/v1/survey/orders")
         console.log("from fetch page start")
         console.log(await resp)
+        setOrder(resp.data)
         console.log("from fetch page end")
         // console.log(resp.data)
     }, [])
