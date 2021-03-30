@@ -60,7 +60,7 @@ export default function Home() {
       gotoLogin(liff)
     } else {
       console.log(liff.getAccessToken())
-      fetch("https://3edec48878c4.ngrok.io/api/v1/survey/login", {
+      fetch("https://b51008d01f25.ngrok.io/api/v1/survey/login", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
