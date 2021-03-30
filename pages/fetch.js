@@ -19,6 +19,12 @@ export default function fetch() {
         const resp = await axiosCustom.post("https://3bfdfa5d3211.ngrok.io/api/v1/survey/auth/logout")
         console.log(resp)
     }
+    const logoutAll = async () => {
+        firebaseLogout()
+        await backendLogout()
+        await onLogout()
+        console.log("logout success")
+    }
 
     const [order, setOrder] = React.useState([])
     React.useEffect(async () => {
@@ -36,9 +42,7 @@ export default function fetch() {
             {order.map(item => {
                 return <p>{item.id}</p>
             })}
-            <button onClick={onLogout}>logout</button>
-            <button onClick={firebaseLogout}>firebase logout</button>
-            <button onClick={backendLogout}>backend Logout</button>
+            <button onClick={logoutAll}>logout</button>
         </div>
     )
 }
