@@ -24,4 +24,4 @@ axiosCustom.interceptors.response.use(response => {
     return { test: "data" }
 
 });
-export const customAxios = axiosCustom
+export default axiosCustom
