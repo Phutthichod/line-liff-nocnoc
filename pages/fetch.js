@@ -2,6 +2,7 @@ import { responsiveFontSizes } from '@material-ui/core'
 import React from 'react'
 import customAxios from '../functions/axios'
 import fire from '../config/fire-config'
+import axiosCustom from '../functions/axios'
 export default function fetch() {
 
     const onLogout = async () => {
@@ -12,12 +13,16 @@ export default function fetch() {
         liff.logout()
     }
     const firebaseLogout = () => {
-        fire.auth().signOut()
+        console.log(fire.auth().signOut())
+    }
+    const backendLogout = async () => {
+        const resp = await axiosCustom.post("https://3bfdfa5d3211.ngrok.io/api/v1/survey/auth/logout")
+        console.log(resp)
     }
 
     const [order, setOrder] = React.useState([])
     React.useEffect(async () => {
-        const resp = await customAxios.get(" https://3bfdfa5d3211.ngrok.io/api/v1/survey/orders")
+        const resp = await customAxios.get("https://3bfdfa5d3211.ngrok.io/api/v1/survey/orders")
         console.log("from fetch page start")
         console.log(await resp)
         setOrder(resp.data)
@@ -33,6 +38,7 @@ export default function fetch() {
             })}
             <button onClick={onLogout}>logout</button>
             <button onClick={firebaseLogout}>firebase logout</button>
+            <button onClick={backendLogout}>backend Logout</button>
         </div>
     )
 }

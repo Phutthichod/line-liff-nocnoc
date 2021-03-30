@@ -10,7 +10,7 @@ export default function test() {
         })
         // const resp = await axios.get("https://api.line.me/oauth2/v2.1/verify?access_token=" + liff.getAccessToken)
         console.log(liff.getAccessToken())
-        const resp = await axios.post("http://localhost:8080/api/v1/survey/login", {}, {
+        const resp = await axios.post("http://localhost:8080/api/v1/survey/auth/login", {}, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
