@@ -21,7 +21,7 @@ axiosCustom.interceptors.response.use(response => {
 }, function (error) {
     const status = error.response ? error.response.status : null
     const originalRequest = error.config;
-    return axiosCustom(originalRequest)
+    return { test: "data" }
 
 });
 export const customAxios = axiosCustom
