@@ -16,7 +16,7 @@ axiosCustom.interceptors.request.use(config => {
     }
 );
 axiosCustom.interceptors.response.use(response => {
-    console.log(response)
+    // console.log(response)
     return response;
 }, function (error) {
     const status = error.response ? error.response.status : null
