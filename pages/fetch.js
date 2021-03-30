@@ -3,7 +3,7 @@ import React from 'react'
 import { customAxios } from '../functions/axios'
 export default function fetch() {
     const [order, setOrder] = React.useState([])
-    React.useEffect(() => {
+    React.useEffect(async () => {
         const resp = await customAxios.get("https://b51008d01f25.ngrok.io/api/v1/survey/orders")
         console.log(await resp)
     }, [])
