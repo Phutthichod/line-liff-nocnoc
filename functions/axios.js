@@ -67,7 +67,9 @@ axiosCustom.interceptors.response.use(response => {
             } catch (err) {
 
             }
+
         }
     } catch (error) { }
+    return Promise.reject(error);
 });
-export const customAxios = axiosCustom
+export default axiosCustom
