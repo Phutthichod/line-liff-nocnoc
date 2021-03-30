@@ -30,39 +30,38 @@ axiosCustom.interceptors.response.use(response => {
                     liffId: "1655538913-PnDo5YK0"
                 })
                 if (liff.isLoggedIn()) {
-                    fetch("https://3edec48878c4.ngrok.io/api/v1/survey/login", {
-                        method: "POST",
+                    const resp = await axiosCustom.post("https://3edec48878c4.ngrok.io/api/v1/survey/login", {
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + liff.getAccessToken(),
                         }
-                    }).then(res => res.json()).then(resp => {
-                        console.log(resp)
-                        fire.auth().signInWithCustomToken(resp.access_token)
-                            .then((userCredential) => {
-                                // Signed in
-                                fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
-                                    console.log(idToken)
-                                    localStorage.setItem("access_token", idToken)
-                                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + idToken;
-                                    return axiosCustom(originalRequest)
-                                }).catch(function (error) {
-                                    // Handle error
-                                    console.log(error)
-                                    // window.location.href("/")
-                                });
-
-
-                            })
-                            .catch((error) => {
-                                var errorCode = error.code;
-                                var errorMessage = error.message;
-                                console.log(errorCode, errorMessage)
-                                // window.location.href("/")
-                                // ...
-                            });
                     })
+                    const token = resp.data.access_token
+
+                    fire.auth().signInWithCustomToken(token)
+                        .then((userCredential) => {
+                            // Signed in
+                            fire.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+                                console.log(idToken)
+                                localStorage.setItem("access_token", idToken)
+                                axios.defaults.headers.common['Authorization'] = 'Bearer ' + idToken;
+                                return axiosCustom(originalRequest)
+                            }).catch(function (error) {
+                                // Handle error
+                                console.log(error)
+                                // window.location.href("/")
+                            });
+
+
+                        })
+                        .catch((error) => {
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            console.log(errorCode, errorMessage)
+                            // window.location.href("/")
+                            // ...
+                        });
                 } else {
                     // window.location.href("/")
                 }
@@ -71,6 +70,5 @@ axiosCustom.interceptors.response.use(response => {
             }
         }
     } catch (error) { }
-    return Promise.reject(error);
 });
 export const customAxios = axiosCustom

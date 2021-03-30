@@ -10,8 +10,6 @@ export default function fetch() {
                 setOrder(res.data)
             }
 
-        }).catch(err => {
-            console.log(err)
         })
     }, [])
     return (
