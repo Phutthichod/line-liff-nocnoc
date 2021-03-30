@@ -1,6 +1,5 @@
 import { responsiveFontSizes } from '@material-ui/core'
 import React from 'react'
-import customAxios from '../functions/axios'
 import fire from '../config/fire-config'
 import { axiosCustom } from '../functions/axios'
 export default function fetch() {
